@@ -6,7 +6,7 @@ class MyScriptedUserAction : ScriptedUserAction﻿
 	{
 		SCR_ChimeraCharacter character = SCR_ChimeraCharacter.Cast(pUserEntity);
 		Faction faction = character.GetFaction();
-		string factionName = faction.GetFactionName();﻿
+		//string factionName = faction.GetFactionName();﻿
 		//Print(factionName);
 		string characterName = character.GetName();
 		//Print(characterName);
