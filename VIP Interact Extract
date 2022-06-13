@@ -1,0 +1,35 @@
+//For Interaction Rank-Based Victory Conditions. Add to interact objects via "Additional Actions"
+class MyScriptedUserAction : ScriptedUserAction﻿
+{
+	//------------------------------------------------------------------------------------------------
+	override void PerformAction(IEntity pOwnerEntity, IEntity pUserEntity)
+	{
+		SCR_ChimeraCharacter character = SCR_ChimeraCharacter.Cast(pUserEntity);
+		Faction faction = character.GetFaction();
+		string factionName = faction.GetFactionName();﻿
+		//Print(factionName);
+		string characterName = character.GetName();
+		//Print(characterName);
+		ECharacterRank rank = SCR_CharacterRankComponent.GetCharacterRank(pUserEntity);
+		string rankNumber = rank.ToString();
+		//string rankName = SCR_CharacterRank.GetRankName(pUserEntity);
+		//string rankName = SCR_CharacterRankComponent.GetCharacterRankNameUpperCase(pUserEntity);
+		//Print(rankNumber);
+		
+		if (faction)﻿
+		{
+			if (rankNumber == "8")
+			{
+				VIPExtractVictory(faction);
+			}
+		}
+	}
+	
+	void VIPExtractVictory(Faction faction)
+	{
+		SCR_BaseGameMode gameMode = SCR_BaseGameMode.Cast(GetGame().GetGameMode());
+		int factionIndex = GetGame().GetFactionManager().GetFactionIndex(faction);
+		gameMode.EndGameMode(SCR_GameModeEndData.CreateSimple(SCR_GameModeEndData.ENDREASON_EDITOR_FACTION_VICTORY, -1, factionIndex));
+	}
+
+};
